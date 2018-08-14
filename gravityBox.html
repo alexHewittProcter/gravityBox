@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+   <head>
+       <style>
+           #box {
+               width: 100px;
+               height: 100px;
+               background-color: blue;
+               position: absolute;
+               
+           }
+       </style>
+   </head> 
+   <body style='position:relative' onkeydown="moveBox(event)">
+       <div id='box'>
+
+       </div>
+       <script type='text/javascript'>
+       (function() {
+                
+            })();
+            var box;
+            var horizontalMove = 0;
+            var verticalMove = 0;
+            window.onload = function() {
+                //testWindow();
+                box = document.getElementById('box');
+                setBox();
+                window.setInterval(animateBox,50);
+            }
+            window.onresize = function() {
+                setBox();
+            }
+            
+            function moveBox(event) {
+                var x = event.keyCode;
+                switch(x) {
+                    case 37 :
+                        horizontalMove = horizontalMove - 10;;
+                        break;
+                    case 38 :
+                        verticalMove = verticalMove - 10;
+                        break;
+                    case 39 :
+                        horizontalMove = horizontalMove + 10;
+                        break;
+                    case 40 : 
+                        verticalMove = verticalMove + 10;
+                        break;
+                }
+                setBox();
+            }
+            function animateBox() {
+                if(horizontalMove > 0) {
+                    horizontalMove--;
+                } else if(horizontalMove < 0) {
+                    horizontalMove++;
+                }
+                if(verticalMove > 0) {
+                    verticalMove--;
+                } else if(verticalMove < 0) {
+                    verticalMove++;
+                }
+                setBox();
+            }
+            function testWindow() {
+                alert(window);
+            }
+            function setBox() {
+                box.style.top = ((window.outerHeight/2 - 50) + verticalMove) + "px";
+                box.style.left = ((window.outerWidth/2 - 50) + horizontalMove) + "px";
+            }
+        </script>
+   </body>
+</html>
